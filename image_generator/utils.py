@@ -30,13 +30,28 @@ def get_average_color(image: Image.Image):
 
 
 def text_image(
-    text: str, font: str, size: int, color: Tuple[int, int, int] = (0, 0, 0),
-    contrast_degree: Union[int, float]=1, pos: Tuple[int, int] = (0, 0), anchor: str = "lt",
-    stroke_fill=(0, 0, 0, 0), stroke_width=0) -> Image.Image:
+    text: str,
+    font: str,
+    size: int,
+    color: Tuple[int, int, int] = (0, 0, 0),
+    contrast_degree: Union[int, float] = 1,
+    pos: Tuple[int, int] = (0, 0),
+    anchor: str = "lt",
+    stroke_fill=(0, 0, 0, 0),
+    stroke_width=0,
+) -> Image.Image:
     font = ImageFont.truetype(font, size)
-    image = Image.new("RGBA", (size*len(text), size*2), (0, 0, 0, 0))
+    image = Image.new("RGBA", (size * len(text), size * 2), (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)
-    draw.text(pos, text, color, anchor=anchor, font=font, stroke_fill=stroke_fill, stroke_width=stroke_width)
+    draw.text(
+        pos,
+        text,
+        color,
+        anchor=anchor,
+        font=font,
+        stroke_fill=stroke_fill,
+        stroke_width=stroke_width,
+    )
     contrast_enhancer = ImageEnhance.Contrast(image)
     contrast_img = contrast_enhancer.enhance(contrast_degree)
     return contrast_img
@@ -47,9 +62,11 @@ def is_dark(color: Tuple[int, int, int]):
         True if color[0] * 0.299 + color[1] * 0.587 + color[2] * 0.114 < 192 else False
     )
 
+
 def player_time_format(time_stamp: int) -> str:
     struct_time = localtime(time_stamp / 1000)
     return strftime("%Y-%m-%d %H:%M:%S", struct_time)
+
 
 def get_song_info(song_id: str) -> Dict:
     with open(StaticPath.slst_json, "r", encoding="UTF-8") as f:
@@ -57,6 +74,7 @@ def get_song_info(song_id: str) -> Dict:
     for i in slst["songs"]:
         if i["id"] == song_id:
             return i
+
 
 def choice_ptt_background(ptt: int):
     if ptt == -1:
@@ -77,6 +95,7 @@ def choice_ptt_background(ptt: int):
     else:
         return "rating_6.png"
 
+
 # Lagecy
 class DataText:
     def __init__(self, L, T, size, text, path, anchor="lt") -> None:
@@ -88,18 +107,52 @@ class DataText:
         self.anchor = anchor
 
 
-def write_text(image: Image.Image, font, text="text", pos=(0, 0), color=(255, 255, 255, 255),
-               anchor="lt", stroke_width=0, stroke_fill="Black") -> Image.Image:
+def write_text(
+    image: Image.Image,
+    font,
+    text="text",
+    pos=(0, 0),
+    color=(255, 255, 255, 255),
+    anchor="lt",
+    stroke_width=0,
+    stroke_fill="Black",
+) -> Image.Image:
     rgba_image = image
     text_overlay = Image.new("RGBA", rgba_image.size, (255, 255, 255, 0))
     image_draw = ImageDraw.Draw(text_overlay)
-    image_draw.text(pos, text, font=font, fill=color, anchor=anchor, stroke_width=stroke_width, stroke_fill=stroke_fill)
+    image_draw.text(
+        pos,
+        text,
+        font=font,
+        fill=color,
+        anchor=anchor,
+        stroke_width=stroke_width,
+        stroke_fill=stroke_fill,
+    )
     return Image.alpha_composite(rgba_image, text_overlay)
 
 
-def draw_text(image, class_text: DataText, R=255, G=255, B=255, A=255, stroke_width=0, stroke_fill="Black") -> Image.Image:
+def draw_text(
+    image,
+    class_text: DataText,
+    R=255,
+    G=255,
+    B=255,
+    A=255,
+    stroke_width=0,
+    stroke_fill="Black",
+) -> Image.Image:
     font = class_text.font
     text = class_text.text
     anchor = class_text.anchor
     color = (R, G, B, A)
-    return write_text(image, font, text, (class_text.L, class_text.T), color, anchor, stroke_width=stroke_width, stroke_fill=stroke_fill)
+    return write_text(
+        image,
+        font,
+        text,
+        (class_text.L, class_text.T),
+        color,
+        anchor,
+        stroke_width=stroke_width,
+        stroke_fill=stroke_fill,
+    )
