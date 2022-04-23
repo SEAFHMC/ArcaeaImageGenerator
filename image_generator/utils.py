@@ -2,7 +2,7 @@ from PIL import Image, ImageFont, ImageDraw, ImageEnhance
 from numpy import average
 from .assets import StaticPath
 from typing import Tuple, Union, Dict
-from time import localtime, mktime, strftime
+from time import localtime, strftime
 import ujson as json
 
 
@@ -132,27 +132,9 @@ def write_text(
     return Image.alpha_composite(rgba_image, text_overlay)
 
 
-def draw_text(
-    image,
-    class_text: DataText,
-    R=255,
-    G=255,
-    B=255,
-    A=255,
-    stroke_width=0,
-    stroke_fill="Black",
-) -> Image.Image:
+def draw_text(image, class_text: DataText, color: Tuple[int, int, int, int] = (255, 255, 255, 255), stroke_width=0, stroke_fill="Black") -> Image.Image:
     font = class_text.font
     text = class_text.text
     anchor = class_text.anchor
-    color = (R, G, B, A)
-    return write_text(
-        image,
-        font,
-        text,
-        (class_text.L, class_text.T),
-        color,
-        anchor,
-        stroke_width=stroke_width,
-        stroke_fill=stroke_fill,
-    )
+    color = color
+    return write_text(image, font, text, (class_text.L, class_text.T), color, anchor, stroke_width=stroke_width, stroke_fill=stroke_fill)

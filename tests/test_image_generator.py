@@ -5,5 +5,5 @@ data = ApiResult()
 data.get_b30()
 
 
-res = draw_b30(data)
+res = draw_b30(arcaea_id="114514233", data=data)
 res.show()
