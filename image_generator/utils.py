@@ -26,7 +26,7 @@ def get_average_color(image: Image.Image):
     R_average = int(average(R_list))
     G_average = int(average(G_list))
     B_average = int(average(B_list))
-    return (R_average, G_average, B_average)
+    return (R_average, G_average, B_average, 255)
 
 
 def text_image(

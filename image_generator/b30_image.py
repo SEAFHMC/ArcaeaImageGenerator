@@ -2,7 +2,6 @@ from PIL import Image, ImageEnhance
 from typing import Tuple, Dict
 from .assets import StaticPath
 from .utils import (
-    text_image,
     open_img,
     get_song_info,
     get_average_color,

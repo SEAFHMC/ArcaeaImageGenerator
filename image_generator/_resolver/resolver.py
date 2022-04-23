@@ -2,7 +2,7 @@ import ujson as json
 from ..assets import root
 from ..utils import get_song_info
 
-json_path = root._resolver / ("recent_data.json")
+json_path = root._resolver / ("data.json")
 with open(json_path, "r", encoding="UTF-8") as f:
     data = json.loads(f.read())
 
