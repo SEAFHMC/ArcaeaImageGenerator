@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # Pics
-*.png
-*.jpg
+song/
+char/
