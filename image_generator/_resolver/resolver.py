@@ -1,8 +1,8 @@
 import ujson as json
 from ..assets import root
+from ..utils import get_song_info
 
-
-json_path = root._resolver / ("data.json")
+json_path = root._resolver / ("recent_data.json")
 with open(json_path, "r", encoding="UTF-8") as f:
     data = json.loads(f.read())
 
@@ -50,9 +50,9 @@ class ApiResult:
         )
         self.rating: int = self.data["content"]["account_info"]["rating"]
         self.song_id: str = self.data["content"]["recent_score"][0]["song_id"]
-        #        self.song_info: list = get_song_info()
-        #        self.song_name: str = self.song_info[0]["data"][self.song_id]["en"]
-        #        self.author_name: str = self.song_info[1]["data"][self.song_id]
+        self.song_info: list = get_song_info(self.song_id)
+        self.song_name: str = self.song_info["title_localized"]["en"]
+        self.author_name: str = self.song_info["artist"]
         self.difficulty: int = self.data["content"]["recent_score"][0]["difficulty"]
         self.score: int = self.data["content"]["recent_score"][0]["score"]
         self.shiny_perfect_count: int = self.data["content"]["recent_score"][0][
@@ -65,7 +65,7 @@ class ApiResult:
         self.miss_count: int = self.data["content"]["recent_score"][0]["miss_count"]
         self.health: int = self.data["content"]["recent_score"][0]["health"]
         self.song_rating: float = self.data["content"]["recent_score"][0]["rating"]
-        #        self.constant: float = get_song_info()[2]["data"][self.song_id][self.data["content"]["recent_score"][0]["difficulty"]]
+        self.constant: float = self.song_info["difficulties"][self.difficulty]["rating"]
         self.full_character = (
             f"{self.character}u.png"
             if self.is_char_uncapped ^ self.is_char_uncapped_override

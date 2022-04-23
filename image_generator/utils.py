@@ -96,6 +96,7 @@ def choice_ptt_background(ptt: int):
         return "rating_6.png"
 
 
+
 # Lagecy
 class DataText:
     def __init__(self, L, T, size, text, path, anchor="lt") -> None:

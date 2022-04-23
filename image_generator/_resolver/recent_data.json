@@ -1,0 +1,96 @@
+{
+  "status": 0,
+  "content": {
+    "account_info": {
+      "code": "658041097",
+      "name": "SokuRitsuki",
+      "user_id": 1715907,
+      "is_mutual": false,
+      "is_char_uncapped_override": false,
+      "is_char_uncapped": false,
+      "is_skill_sealed": false,
+      "rating": 1058,
+      "join_date": 1558085421146,
+      "character": 14
+    },
+    "recent_score": [
+      {
+        "score": 9939075,
+        "health": 100,
+        "rating": 11.095375,
+        "song_id": "lastendconductor",
+        "modifier": 0,
+        "difficulty": 2,
+        "clear_type": 1,
+        "best_clear_type": 5,
+        "time_played": 1649825274579,
+        "near_count": 7,
+        "miss_count": 4,
+        "perfect_count": 1198,
+        "shiny_perfect_count": 1110
+      }
+    ],
+    "songinfo": [
+      {
+        "id": "lastendconductor",
+        "title_localized": {
+          "en": "lastendconductor"
+        },
+        "artist": "zts",
+        "bpm": "139",
+        "bpm_base": 139.0,
+        "set": "single",
+        "world_unlock": false,
+        "remote_dl": true,
+        "side": 1,
+        "bg": "",
+        "time": 184,
+        "date": 1632873602,
+        "version": "3.8",
+        "difficulties": [
+          {
+            "ratingClass": 0,
+            "chartDesigner": "Nitro",
+            "jacketDesigner": "",
+            "jacketOverride": false,
+            "audioOverride": false,
+            "rating": 0,
+            "realrating": 35,
+            "totalNotes": 726
+          },
+          {
+            "ratingClass": 1,
+            "chartDesigner": "Nitro",
+            "jacketDesigner": "",
+            "jacketOverride": false,
+            "audioOverride": false,
+            "rating": 0,
+            "realrating": 70,
+            "totalNotes": 901
+          },
+          {
+            "ratingClass": 2,
+            "chartDesigner": "Nitro",
+            "jacketDesigner": "",
+            "jacketOverride": false,
+            "audioOverride": false,
+            "rating": 0,
+            "realrating": 94,
+            "totalNotes": 1209
+          },
+          {
+            "ratingClass": 3,
+            "chartDesigner": "Toaster",
+            "jacketDesigner": "",
+            "jacketOverride": false,
+            "audioOverride": false,
+            "rating": 0,
+            "realrating": 102,
+            "totalNotes": 1339
+          }
+        ],
+        "set_friendly": "Memory Archive"
+      }
+    ]
+  }
+}
