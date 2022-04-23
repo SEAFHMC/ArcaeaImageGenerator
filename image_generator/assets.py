@@ -38,12 +38,12 @@ class StaticPath:
     diff_dir = root.assets.diff
     char_dir = root.assets.char
     ptt_dir = root.assets.ptt
-    andrea = root.assets.Fonts / ("Andrea.otf")
-    exo_andrea_light = root.assets.Fonts / ("Exo Andrea Light.otf")
-    exo_medium = root.assets.Fonts / ("Exo-Medium.ttf")
-    kazesawa_light = root.assets.Fonts / ("Kazesawa-Light.ttf")
-    kazesawa_regular = root.assets.Fonts / ("Kazesawa-Regular.ttf")
-    notosanscjksc_regular = root.assets.Fonts / ("NotoSansCJKsc-Regular.otf")
+    andrea = root.assets.font / ("Andrea.otf")
+    exo_andrea_light = root.assets.font / ("Exo Andrea Light.otf")
+    exo_medium = root.assets.font / ("Exo-Medium.ttf")
+    kazesawa_light = root.assets.font / ("Kazesawa-Light.ttf")
+    kazesawa_regular = root.assets.font / ("Kazesawa-Regular.ttf")
+    notosanscjksc_regular = root.assets.font / ("NotoSansCJKsc-Regular.otf")
 
     #Recent
     recent_background = root.assets.recent/("recent_bg.png")
