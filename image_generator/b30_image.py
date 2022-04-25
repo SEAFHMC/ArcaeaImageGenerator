@@ -117,7 +117,7 @@ def draw_b30(arcaea_id: str, data: ApiResult):
                              StaticPath.exo_medium, anchor="lb")
     B30_bg = draw_text(B30_bg, write_arcname)
     write_arcaea_id = DataText(
-        380, 360, 60, f"ID:{arcaea_id}", StaticPath.exo_medium, anchor="lb")
+        380, 364, 60, f"ID:{arcaea_id}", StaticPath.exo_medium, anchor="lb")
     B30_bg = draw_text(B30_bg, write_arcaea_id)
     write_r10 = DataText(
         1000, 560, 100, f"Recent 10: {recent:.3f}", StaticPath.exo_medium, anchor="lb")
