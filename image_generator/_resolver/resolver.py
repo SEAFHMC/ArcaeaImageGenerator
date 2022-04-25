@@ -51,7 +51,8 @@ class ApiResult:
         self.rating: int = self.data["content"]["account_info"]["rating"]
         self.song_id: str = self.data["content"]["recent_score"][0]["song_id"]
         self.song_info: list = get_song_info(self.song_id)
-        self.song_name: str = self.song_info["title_localized"]["en"]
+#        self.song_name: str = self.song_info["title_localized"]["en"]
+        self.song_name = "ろいろバカ(616sb)"
         self.author_name: str = self.song_info["artist"]
         self.difficulty: int = self.data["content"]["recent_score"][0]["difficulty"]
         self.score: int = self.data["content"]["recent_score"][0]["score"]
