@@ -11,7 +11,7 @@ from .utils import (
     draw_text,
     choice_ptt_background,
 )
-from ._resolver.resolver import ApiResult
+
 
 
 def draw_score_bg(
@@ -96,7 +96,7 @@ def draw_score_detail(data: Dict, rank: int, song_id: str, mask: Image.Image) ->
     return image
 
 
-def draw_b30(arcaea_id: str, data: ApiResult):
+def draw_b30(data: Dict):
     B30_bg = open_img(StaticPath.B30_bg)
     # User Info
     name: str = data.name
@@ -104,6 +104,8 @@ def draw_b30(arcaea_id: str, data: ApiResult):
     best: float = data.best
     recent: float = data.recent
     icon: str = data.icon
+    score_info_list = data.score_info_list
+    arcaea_id: str = "a"
     icon = open_img(StaticPath.char_dir/icon).resize((250, 250))
     B30_bg.alpha_composite(icon, (75, 130))
     ptt_background = open_img(StaticPath.ptt_dir/choice_ptt_background(rating)).resize((150, 150))
@@ -126,7 +128,6 @@ def draw_b30(arcaea_id: str, data: ApiResult):
         200, 560, 100, f"Best 30: {best:.3f}", StaticPath.exo_medium, anchor="lb")
     B30_bg = draw_text(B30_bg, write_b30)
     # Score Info
-    score_info_list = data.score_info_list
     divider = open_img(StaticPath.divider).resize((2000, 50))
     background_y = 640
     background_x = 0
@@ -142,5 +143,5 @@ def draw_b30(arcaea_id: str, data: ApiResult):
         if num / 3 == 10:
             background_y += 100
             B30_bg.alpha_composite(divider, (0, background_y-87))
-        B30_bg.alpha_composite(draw_score_detail(value, rank=num, song_id=value["song_id"], mask=mask), (background_x, background_y))
+        B30_bg.alpha_composite(draw_score_detail(data=value, rank=num, song_id=value["song_id"], mask=mask), (background_x, background_y))
     return B30_bg
