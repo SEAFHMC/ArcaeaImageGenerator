@@ -99,13 +99,21 @@ def draw_score_detail(data: Dict, rank: int, song_id: str, mask: Image.Image) ->
 def draw_b30(data: Dict):
     B30_bg = open_img(StaticPath.B30_bg)
     # User Info
-    name: str = data.name
-    rating: str = data.rating
-    best: float = data.best
-    recent: float = data.recent
-    icon: str = data.icon
-    score_info_list = data.score_info_list
-    arcaea_id: str = "a"
+    best: float = data["content"]["best30_avg"]
+    recent: float = data["content"]["recent10_avg"]
+    account_info = data["content"]["account_info"]
+    arcaea_id: str = account_info["code"]
+    name: str = account_info["name"]
+    rating: str = account_info["rating"]
+    character = account_info["character"]
+    is_char_uncapped_override: bool = account_info["is_char_uncapped_override"]
+    is_char_uncapped: bool = account_info["is_char_uncapped"]
+    icon: str = (
+        f"{character}u_icon.png"
+        if is_char_uncapped ^ is_char_uncapped_override
+        else f"{character}_icon.png"
+    )
+    score_info_list = data["content"]["best30_list"]+data["content"]["best30_overflow"]
     icon = open_img(StaticPath.char_dir/icon).resize((250, 250))
     B30_bg.alpha_composite(icon, (75, 130))
     ptt_background = open_img(StaticPath.ptt_dir/choice_ptt_background(rating)).resize((150, 150))
