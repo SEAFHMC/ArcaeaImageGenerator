@@ -1,86 +1,59 @@
-from typing import Dict, List
-from datetime import datetime
+from typing import List
 
-from pydantic import validator
 
 from ...basemodel import Base
-from ..utils import num2diffstr
 
 
 """
 {
-    "$schema": "https://github.com/TheSnowfield/BotArcAPI/wiki/Reference-of-v4-song-info",
-    "id": "ifi",
+    "idx": 0,
+    "id": "sayonarahatsukoi",
     "title_localized": {
-        "en": "#1f1e33"
+    "en": "Sayonara Hatsukoi"
     },
-    "artist": "かめりあ(EDP)",
-    "bpm": "181",
-    "bpm_base": 181,
-    "set": "vs",
-    "audioTimeSec": 163,
-    "side": 1,
-    "remote_dl": true,
-    "world_unlock": false,
-    "date": 1590537604,
+    "artist": "REDSHiFT",
+    "bpm": "178",
+    "bpm_base": 178,
+    "set": "base",
+    "purchase": "",
+    "audioPreview": 44494,
+    "audioPreviewEnd": 76853,
+    "side": 0,
+    "bg": "",
+    "date": 1487980800,
+    "version": "1.0",
     "difficulties": [
-        {
-            "ratingClass": 0,
-            "chartDesigner": "夜浪",
-            "jacketDesigner": "望月けい",
-            "rating": 5,
-            "ratingReal": 5.5,
-    "totalNotes": 765
-        },
-        {
-            "ratingClass": 1,
-            "chartDesigner": "夜浪",
-            "jacketDesigner": "望月けい",
-            "rating": 9,
-            "ratingReal": 9.2,
-    "totalNotes": 1144
-        },
-        {
-            "ratingClass": 2,
-            "chartDesigner": "夜浪 VS 東星 \"Convergence\"",
-            "jacketDesigner": "望月けい",
-            "rating": 10,
-            "ratingReal": 10.9,
-            "ratingPlus": true,
-    "totalNotes": 1576
-        }
+    {
+        "ratingClass": 0,
+        "chartDesigner": "Nitro",
+        "jacketDesigner": "",
+        "rating": 1
+    },
+    {
+        "ratingClass": 1,
+        "chartDesigner": "Nitro",
+        "jacketDesigner": "",
+        "rating": 4
+    },
+    {
+        "ratingClass": 2,
+        "chartDesigner": "Toaster",
+        "jacketDesigner": "",
+        "rating": 7
+    }
     ]
 }
 """
 
-class SongInfoPerLevel(Base):
-    ratingClass: str
-    chartDesigner: str
-    jacketDesigner: str
+class TitleLocalized(Base):
+    en: str
+
+class DifficultyInfo(Base):
     rating: int
-    ratingReal: float
-    totalNotes: int
-    ratingPlus: bool = False
-
-    @validator('ratingClass', pre=True)
-    def prehandle_ratingclass(cls, v: int) -> str:
-        return num2diffstr(v)
-
 
 class SongInfo(Base):
+    idx: int
     id: str
-    title_localized: Dict[str, str]
+    title_localized: TitleLocalized
     artist: str
-    bpm: float       # automatic type conversion
-    bpm_base: float  # automatic type conversion
-    set: str
-    audioTimeSec: int
-    side: int
-    remote_dl: bool
-    world_unlock: bool
-    date: datetime
-    difficulties: List[SongInfoPerLevel]
-
-    @validator('difficulties', pre=True)
-    def prehandle_songinfo_difficulties(cls, v: List[dict]) -> List[SongInfoPerLevel]:
-        return [SongInfoPerLevel(**d) for d in sorted(v, key=lambda x: x['ratingClass'])]
+    difficulties: List[DifficultyInfo]
