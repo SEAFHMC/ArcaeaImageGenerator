@@ -3,34 +3,61 @@ from typing import List
 from pydantic import validator
 
 from ...basemodel import Base
-from .songscore import SongScore
+from .song_score import SongScore
+from .account_info import AccountInfo
 
 
 """
 {
-    "$schema": "https://github.com/TheSnowfield/BotArcAPI/wiki/Reference-of-v4-user-best30",
-    "best30_avg": 0.0000,
-    "recent10_avg": 0.0000,
+    "best30_avg": 12.707672500000001,
+    "recent10_avg": 12.836982499999998,
+    "account_info": {
+      "code": "062596721",
+      "name": "ToasterKoishi",
+      "user_id": 4,
+      "is_mutual": false,
+      "is_char_uncapped_override": false,
+      "is_char_uncapped": true,
+      "is_skill_sealed": false,
+      "rating": 1274,
+      "join_date": 1487816563340,
+      "character": 12
+    },
     "best30_list": [
-        {
-            "song_id": "grievouslady",
-            "difficulty": 2,
-            "score": 0,
-            "shiny_perfect_count": 0,
-            "perfect_count": 0,
-            "near_count": 0,
-            "miss_count": 0,
-            "health": 0,
-            "modifier": 0,
-            "time_played": 114514145141,
-            "best_clear_type": 0,
-            "clear_type": 0,
-            "character": 0,
-            "is_skill_sealed": false,
-            "is_char_uncapped": false,
-            "rating": 0.0000
-        },
-        # more data....
+      {
+        "score": 9956548,
+        "health": 100,
+        "rating": 13.082740000000001,
+        "song_id": "grievouslady",
+        "modifier": 0,
+        "difficulty": 2,
+        "clear_type": 1,
+        "best_clear_type": 5,
+        "time_played": 1614911430950,
+        "near_count": 7,
+        "miss_count": 3,
+        "perfect_count": 1440,
+        "shiny_perfect_count": 1376
+      },
+      # More Score Info  
+    ],
+    "best30_overflow": [
+      {
+        "score": 9993863,
+        "health": 100,
+        "rating": 12.469315,
+        "song_id": "ikazuchi",
+        "modifier": 0,
+        "difficulty": 2,
+        "clear_type": 1,
+        "best_clear_type": 2,
+        "time_played": 1584913642898,
+        "near_count": 0,
+        "miss_count": 1,
+        "perfect_count": 1346,
+        "shiny_perfect_count": 1287
+      },
+      # More Score Info
     ]
 }
 """
@@ -38,10 +65,6 @@ from .songscore import SongScore
 class UserBest30(Base):
     best30_avg: float
     recent10_avg: float
-    best30_list: List[SongScore]  # 依据 rating 排序
-
-    @validator('best30_list', pre=True)
-    def prehandle_best30_list(cls, best30_list: List[dict]) -> List[SongScore]:
-        if len(best30_list) > 30:
-            raise ValueError
-        return [SongScore(**d) for d in sorted(best30_list, key=lambda x: x['rating'], reverse=True)]
+    account_info: AccountInfo
+    best30_list: List[SongScore]
+    best30_overflow: List[SongScore]

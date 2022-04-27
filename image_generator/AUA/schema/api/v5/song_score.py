@@ -1,54 +1,37 @@
-from typing import Optional
 from datetime import datetime
 
-from pydantic import validator
-
 from ...basemodel import Base
-from ..utils import num2diffstr
 
 
 """
 {
-    "$schema": "https://github.com/TheSnowfield/BotArcAPI/wiki/Reference-of-v4-user-best",
-    "song_id": "grievouslady",
-    "difficulty": 2,
-    "score": 0,
-    "shiny_perfect_count": 0,
-    "perfect_count": 0,
-    "near_count": 0,
-    "miss_count": 0,
-    "health": 0,
+    "score": 9979350,
+    "health": 100,
+    "rating": 11.59675,
+    "song_id": "melodyoflove",
     "modifier": 0,
-    "time_played": 1145141145141,
-    "best_clear_type": 0,
-    "clear_type": 0,
-    "character": 0,
-    "is_skill_sealed": false,
-    "is_char_uncapped": false,
-    "rating": 0.0000
-}
+    "difficulty": 2,
+    "clear_type": 1,
+    "best_clear_type": 3,
+    "time_played": 1647570474485,
+    "near_count": 2,
+    "miss_count": 1,
+    "perfect_count": 928,
+    "shiny_perfect_count": 833
+},
 """
 
 class SongScore(Base):
-    song_id: str
-    difficulty: str
     score: int
-    shiny_perfect_count: int
-    perfect_count: int
+    health: int
+    rating: float
+    song_id: str
+    modifier: int
+    difficulty: int
+    clear_type: int
+    best_clear_type: int
+    time_played: int
     near_count: int
     miss_count: int
-    time_played: datetime
-    rating: float  # 单曲ptt
-
-    health: Optional[int]
-    clear_type: Optional[int]
-    best_clear_type: Optional[int]
-    modifier: Optional[int]
-    song_date: Optional[int]
-    character: Optional[int]
-    is_skill_sealed: Optional[bool]
-    is_char_uncapped: Optional[bool]
-
-    @validator('difficulty', pre=True)
-    def prehandle_songscore_difficulty(cls, val: int) -> str:
-        return num2diffstr(val)
+    perfect_count: int
+    shiny_perfect_count: int

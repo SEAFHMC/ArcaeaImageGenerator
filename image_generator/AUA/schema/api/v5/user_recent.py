@@ -1,75 +1,46 @@
-from typing import Optional, List
-from datetime import datetime
+from typing import List
 
-from pydantic import validator
+
 
 from ...basemodel import Base
-from .songscore import SongScore
+from .song_score import SongScore
+from .account_info import AccountInfo
 
 
 """
 {
-    "$schema": "https://github.com/TheSnowfield/BotArcAPI/wiki/Reference-of-v4-user-info",
-    "user_id": 114514,
-    "name": "114514",
+    "account_info": {
+        "code": "062596721",
+        "name": "ToasterKoishi",
+        "user_id": 4,
+        "is_mutual": false,
+        "is_char_uncapped_override": false,
+        "is_char_uncapped": true,
+        "is_skill_sealed": false,
+        "rating": 1274,
+        "join_date": 1487816563340,
+        "character": 12
+    },
     "recent_score": [
         {
-            "song_id": "grievouslady",
-            "difficulty": 2,
-            "score": 0,
-            "shiny_perfect_count": 0,
-            "perfect_count": 0,
-            "near_count": 0,
-            "miss_count": 0,
-            "clear_type": 0,
-            "best_clear_type": 0,
-            "health": 0,
-            "time_played": 1145141145141,
-            "modifier": 0,
-            "rating": 0
+        "score": 9979350,
+        "health": 100,
+        "rating": 11.59675,
+        "song_id": "melodyoflove",
+        "modifier": 0,
+        "difficulty": 2,
+        "clear_type": 1,
+        "best_clear_type": 3,
+        "time_played": 1647570474485,
+        "near_count": 2,
+        "miss_count": 1,
+        "perfect_count": 928,
+        "shiny_perfect_count": 833
         },
-        {
-            "song_id": "grievouslady",
-            "difficulty": 4,
-            "score": 0,
-            "shiny_perfect_count": 0,
-            "perfect_count": 0,
-            "near_count": 0,
-            "miss_count": 0,
-            "clear_type": 0,
-            "best_clear_type": 0,
-            "health": 0,
-            "time_played": 233333,
-            "modifier": 0,
-            "rating": 0
-        },
-        # more data... up to 7 scores
-    ],
-    "character": 0,
-    "join_date": 1145141145141,
-    "rating": 0,
-    "is_skill_sealed": false,
-    "is_char_uncapped": false,
-    "is_char_uncapped_override": false,
-    "is_mutual": false
-}
+        # More Score Info
+    ]
 """
 
-class UserInfo(Base):
-    user_id: Optional[int]
-    name: str
-    rating: float
-    recent_score: Optional[SongScore]
-
-    @validator('recent_score', pre=True)
-    def prehandle_recent_score(cls, val: List[dict]) -> Optional[SongScore]:
-        if not val:
-            return None
-        return SongScore(**val[0])
-
-    character: Optional[int]
-    join_date: Optional[datetime]
-    is_skill_sealed: Optional[bool]
-    is_char_uncapped: Optional[bool]
-    is_char_uncapped_override: Optional[bool]
-    is_mutual: Optional[bool]
+class UserRecent(Base):
+    account_info: AccountInfo
+    recent_score: List[SongScore]
