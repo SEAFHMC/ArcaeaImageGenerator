@@ -9,87 +9,50 @@
       "is_char_uncapped_override": false,
       "is_char_uncapped": false,
       "is_skill_sealed": false,
-      "rating": 1058,
+      "rating": -1,
       "join_date": 1558085421146,
       "character": 14
     },
     "recent_score": [
       {
-        "score": 9939075,
+        "score": 9738445,
         "health": 100,
-        "rating": 11.095375,
-        "song_id": "lastendconductor",
+        "rating": 10.194816666666666,
+        "song_id": "saikyostronger",
         "modifier": 0,
-        "difficulty": 2,
+        "difficulty": 1,
         "clear_type": 1,
         "best_clear_type": 5,
-        "time_played": 1649825274579,
-        "near_count": 7,
-        "miss_count": 4,
-        "perfect_count": 1198,
-        "shiny_perfect_count": 1110
+        "time_played": 1651143179870,
+        "near_count": 42,
+        "miss_count": 7,
+        "perfect_count": 1018,
+        "shiny_perfect_count": 863
       }
     ],
     "songinfo": [
       {
-        "id": "lastendconductor",
-        "title_localized": {
-          "en": "lastendconductor"
-        },
-        "artist": "zts",
-        "bpm": "139",
-        "bpm_base": 139.0,
+        "name_en": "SAIKYO STRONGER",
+        "name_jp": "\u6700\u5f37STRONGER",
+        "artist": "REDALiCE vs USAO",
+        "bpm": "205",
+        "bpm_base": 205.0,
         "set": "single",
-        "world_unlock": false,
-        "remote_dl": true,
+        "set_friendly": "Memory Archive",
+        "time": 142,
         "side": 1,
-        "bg": "",
-        "time": 184,
-        "date": 1632873602,
-        "version": "3.8",
-        "difficulties": [
-          {
-            "ratingClass": 0,
-            "chartDesigner": "Nitro",
-            "jacketDesigner": "",
-            "jacketOverride": false,
-            "audioOverride": false,
-            "rating": 0,
-            "realrating": 35,
-            "totalNotes": 726
-          },
-          {
-            "ratingClass": 1,
-            "chartDesigner": "Nitro",
-            "jacketDesigner": "",
-            "jacketOverride": false,
-            "audioOverride": false,
-            "rating": 0,
-            "realrating": 70,
-            "totalNotes": 901
-          },
-          {
-            "ratingClass": 2,
-            "chartDesigner": "Nitro",
-            "jacketDesigner": "",
-            "jacketOverride": false,
-            "audioOverride": false,
-            "rating": 0,
-            "realrating": 94,
-            "totalNotes": 1209
-          },
-          {
-            "ratingClass": 3,
-            "chartDesigner": "Toaster",
-            "jacketDesigner": "",
-            "jacketOverride": false,
-            "audioOverride": false,
-            "rating": 0,
-            "realrating": 102,
-            "totalNotes": 1339
-          }
-        ],
-        "set_friendly": "Memory Archive"
+        "world_unlock": false,
+        "remote_download": true,
+        "bg": "saikyostronger",
+        "date": 1579478403,
+        "version": "2.5",
+        "difficulty": 18,
+        "rating": 94,
+        "note": 1067,
+        "chart_designer": "\u6700\u5f37FUMEN (\u591c\u6d6a ft. \u6771\u661f)",
+        "jacket_designer": "KEI",
+        "jacket_override": false,
+        "audio_override": false
       }
     ]
   }
