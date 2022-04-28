@@ -1,7 +1,6 @@
 from typing import List
 
 
-
 from ...basemodel import Base
 from .song_score import SongScore
 from .account_info import AccountInfo
@@ -39,6 +38,7 @@ from .account_info import AccountInfo
 }
 """
 
-class UserRecent(Base):
+
+class UserBest(Base):
     account_info: AccountInfo
     record: SongScore
