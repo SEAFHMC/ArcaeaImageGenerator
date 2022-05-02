@@ -70,6 +70,9 @@ class StaticPath:
     geosans_light = root.assets.font / ("GeosansLight.ttf")
     notosanscjksc_regular = root.assets.font / ("NotoSansCJKsc-Regular.otf")
     exo_semibold = root.assets.font / ("Exo-SemiBold.ttf")
+    count = root.assets.recent("count.png")
+    time_bg = root.assets.recent("time_bg.png")
+    rating_up = root.assets.recent("rating_up.png")
     # Function
     @staticmethod
     def select_image(*args) -> str:

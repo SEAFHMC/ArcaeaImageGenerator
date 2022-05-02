@@ -1,17 +1,20 @@
-from typing import Dict
+from typing import Union
 from PIL import Image
-from .assets import StaticPath
-from .utils import open_img, choice_ptt_background, DataText, draw_text, get_song_info
-from .AUA import UserRecent, AccountInfo, SongInfo
+from ..assets import StaticPath
+from ..utils import open_img, choice_ptt_background, DataText, draw_text, player_time_format
+from ..AUA import UserRecent, AccountInfo, SongInfo, UserBest
 
 
-def draw_recent(data: Dict):
+def draw_single_song(data: Union[UserRecent, UserBest]):
+    """
+        not finished yet
+    """
     # User Info
-    user_recent: UserRecent = UserRecent(**data["content"])
-    account_info: AccountInfo = user_recent.account_info
+    account_info: AccountInfo = data.account_info
     arcaea_id: str = account_info.code
     name: str = account_info.name
-    character = account_info.character
+#    character = account_info.character
+    character = 54
     is_char_uncapped_override: bool = account_info.is_char_uncapped
     is_char_uncapped: bool = account_info.is_char_uncapped
     icon: str = (
@@ -19,21 +22,25 @@ def draw_recent(data: Dict):
         if is_char_uncapped ^ is_char_uncapped_override
         else f"{character}_icon.png"
     )
-    rating: str = account_info.rating
+#    rating: str = account_info.rating
+    rating: int = 1260
     # Score Info
-    recent_score = user_recent.recent_score[0]
-    song_id: str = recent_score.song_id
-    song_info: SongInfo = user_recent.songinfo[0]
+    if isinstance(data, UserRecent):
+        score_info = data.recent_score[0]
+    else:
+        score_info = data.record
+    song_id: str = score_info.song_id
+    song_info: SongInfo = data.songinfo[0]
     song_name: str = song_info.name_en
     author_name: str = song_info.artist
-    difficulty: int = recent_score.difficulty
-    score: int = recent_score.score
-    shiny_perfect_count: int = recent_score.shiny_perfect_count
-    perfect_count: int = recent_score.perfect_count
-    near_count: int = recent_score.near_count
-    miss_count: int = recent_score.miss_count
-    health: int = recent_score.health
-    song_rating: float = recent_score.rating
+    difficulty: int = score_info.difficulty
+    score: int = score_info.score
+    shiny_perfect_count: int = score_info.shiny_perfect_count
+    perfect_count: int = score_info.perfect_count
+    near_count: int = score_info.near_count
+    miss_count: int = score_info.miss_count
+    health: int = score_info.health
+    song_rating: float = score_info.rating
     constant: float = song_info.rating / 10
     full_character = (
         f"{character}u.png"
@@ -61,7 +68,7 @@ def draw_recent(data: Dict):
     character = open_img(StaticPath.select_image("char", full_character)).resize(
         (1000, 1000)
     )
-    image.alpha_composite(character, (650, 125))
+    image.alpha_composite(character, (600, 125))
     res_scoresection_high = open_img(StaticPath.res_scoresection_high)
     image.alpha_composite(res_scoresection_high, (441, 290))
     hp_bar_base = open_img(
@@ -83,11 +90,10 @@ def draw_recent(data: Dict):
     image.alpha_composite(ptt, (655, 50))
 
     write_player_name = DataText(
-        (560 - len(name) * 20), 20, 40, name, StaticPath.exo_regular
-    )
-    image = draw_text(image, write_player_name, (96, 75, 84, 255))
-    write_arcaea_id = DataText(920, 20, 40, f"id: {arcaea_id}", StaticPath.exo_regular)
-    image = draw_text(image, write_arcaea_id, (96, 75, 84, 255))
+        (560 - len(name) * 20), 35, 40, name, StaticPath.andrea)
+    image = draw_text(image, write_player_name, (96, 75, 84), stroke_fill=(96, 75, 84), stroke_width=1)
+    write_arcaea_id = DataText(950, 40, 30, f"< {arcaea_id} >", StaticPath.exo_semibold)
+    image = draw_text(image, write_arcaea_id, "white", stroke_fill="black", stroke_width=1)
     write_song_name = DataText(
         (640 - len(song_name) / 2 * 20),
         115,
@@ -116,18 +122,16 @@ def draw_recent(data: Dict):
         40,
         230,
         40,
-        ["Past", "Persent", "Future", "Beyond"][difficulty] + " " + str(int(constant)),
-        StaticPath.geosans_light,
+        ["Past", "Present", "Future", "Beyond"][difficulty] + " " + str(int(constant)),
+        StaticPath.kazesawa_regular,
     )
-    image = draw_text(image, write_difficulty, (96, 75, 84, 255))
-    write_recent_text = DataText(40, 20, 45, "Recent", StaticPath.exo_regular)
-    image = draw_text(image, write_recent_text, (96, 75, 84, 255))
-    pure = open_img(StaticPath.pure).resize((90, 90))
-    image.alpha_composite(pure, (550, 500))
-    far = open_img(StaticPath.far).resize((90, 90))
-    image.alpha_composite(far, (550, 540))
-    lost = open_img(StaticPath.lost).resize((90, 90))
-    image.alpha_composite(lost, (550, 580))
+    diff_color = ((20, 165, 215), (120, 150, 80), (115, 35, 100), (166, 20, 49))[difficulty]
+    image = draw_text(image, write_difficulty, diff_color)
+    write_recent_text = DataText(40, 35, 45, "Recent", StaticPath.andrea)
+    image = draw_text(image, write_recent_text, (96, 75, 84), stroke_fill= (96, 75, 84), stroke_width=1)
+    count = open_img(StaticPath.count)
+    count.thumbnail((110, 110))
+    image.alpha_composite(count, (560, 526))
     write_song_rating = DataText(
         660, 380, 25, str(round(song_rating, 2)), StaticPath.geosans_light
     )
@@ -139,28 +143,28 @@ def draw_recent(data: Dict):
         str(perfect_count),
         StaticPath.geosans_light,
     )
-    image = draw_text(image, write_perfect_count, (137, 137, 137, 255))
+    image = draw_text(image, write_perfect_count, (137, 137, 137, 255), stroke_fill="white", stroke_width=2)
     write_shiny_perfect_count = DataText(
         720, 530, 30, "+ " + str(shiny_perfect_count), StaticPath.geosans_light
     )
-    image = draw_text(image, write_shiny_perfect_count, (137, 137, 137, 255))
+    image = draw_text(image, write_shiny_perfect_count, (137, 137, 137, 255), stroke_fill="white", stroke_width=2)
     write_near_count = DataText(
         670 + (4 - len(str(near_count)) / 2 * 15),
-        575,
+        571,
         30,
         str(near_count),
         StaticPath.geosans_light,
     )
-    image = draw_text(image, write_near_count, (137, 137, 137, 255))
+    image = draw_text(image, write_near_count, (110, 110, 110), stroke_fill="white", stroke_width=2)
     write_miss_count = DataText(
         670 + (4 - len(str(miss_count)) / 2 * 15),
-        610,
+        611,
         30,
         str(miss_count),
         StaticPath.geosans_light,
     )
-    image = draw_text(image, write_miss_count, (137, 137, 137, 255))
-    raw_ptt = str(round(rating / 100, 2)).split(".")
+    image = draw_text(image, write_miss_count, (137, 137, 137, 255), stroke_fill="white", stroke_width=2)
+    raw_ptt = f"{(rating/100):.2f}".split(".")
     write_ptt_head = DataText(
         690, 100, 30, raw_ptt[0], StaticPath.exo_semibold, anchor="rs"
     )
@@ -169,4 +173,14 @@ def draw_recent(data: Dict):
         690, 100, 20, "." + raw_ptt[1], StaticPath.exo_semibold, anchor="ls"
     )
     image = draw_text(image, write_ptt_tail, stroke_fill="Black", stroke_width=2)
+    time_bg = open_img(StaticPath.time_bg).resize((314, 70))
+    image.alpha_composite(time_bg, (1050, 690))
+    write_played_time = DataText(1260, 714, 20, player_time_format(score_info.time_played), StaticPath.kazesawa_regular, "rb")
+    image = draw_text(image, write_played_time, "white")
+    rating_up = open_img(StaticPath.rating_up).resize((215, 215))
+    image.alpha_composite(rating_up, (695, -70))
+    write_optential = DataText(800, 38, 28, "POTENTIAL", StaticPath.geosans_light, "ms")
+    image = draw_text(image, write_optential, "white", 1, "grey")
+    write_rating_up = DataText(800, 90, 30, "+12.60", StaticPath.exo_semibold, "ms")
+    image = draw_text(image, write_rating_up, "white", 1, (35, 160, 200))
     return image
