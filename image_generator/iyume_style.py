@@ -1,12 +1,8 @@
-from typing import Union
-import image_generator
-from image_generator.AUA import UserRecent, AccountInfo, SongInfo, UserBest, UserBest30
-from image_generator.request import get_user_recent, get_user_b30
-from image_generator.utils import DataText, draw_text, open_img, StaticPath, player_time_format, choice_ptt_background
-from PIL import Image, ImageFilter, ImageDraw, ImageFont
-from image_generator.single_song.andreal_style_v3 import draw_single_song as andreal_recent
+from pathlib import Path
+from PIL import Image, ImageFont, ImageDraw
 from datetime import datetime
-# from image_generator.single_song.arcaea_style import draw_single_song as arc_recent
+from .assets import StaticPath
+from .AUA import UserBest30
 
 
 def draw_user_b30(obj_in: UserBest30) -> Image.Image:
@@ -41,7 +37,3 @@ def draw_user_b30(obj_in: UserBest30) -> Image.Image:
     author_draw = datetime.now().strftime("%F %X") + "   Powered by iyume"
     draw.text((20, 930), author_draw, (200, 200, 200), font=ft_low)
     return img
-
-data = get_user_b30()
-res= draw_user_b30(UserBest30(**data["content"]))
-res.save("./out.png")
