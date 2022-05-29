@@ -1,6 +1,5 @@
-from typing import List
-
-
+from datetime import datetime
+from typing import Optional
 from ...basemodel import Base
 
 
@@ -33,6 +32,23 @@ from ...basemodel import Base
 
 class SongInfo(Base):
     name_en: str
+    name_jp: Optional[str]
     artist: str
+    bpm: str
+    bpm_base: int
+    set: str
+    set_friendly: str
+    time: int
     side: int
+    world_unlock: bool
+    remote_download: bool
+    bg: str
+    date: datetime
+    version: float
+    difficulty: int
     rating: int
+    note: int
+    chart_designer: str
+    jacket_designer: str
+    jacket_override: bool
+    audio_override: bool
