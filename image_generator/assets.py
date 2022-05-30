@@ -38,7 +38,7 @@ class StaticPath:
     slst_json = root.assets / ("slst.json")
     # iyume
     roboto_bold = root.assets.font("Roboto-Bold.ttf")
-    roboto_regular = root.assets.font/("Roboto-Regular.ttf")
+    roboto_regular = root.assets.font / ("Roboto-Regular.ttf")
     bg = root.assets("bg.png")
     # B30
     B30_bg = root.assets("B30.png")

@@ -1,19 +1,25 @@
 from typing import Union
 from PIL import Image
 from ..assets import StaticPath
-from ..utils import open_img, choice_ptt_background, DataText, draw_text, player_time_format
+from ..utils import (
+    open_img,
+    choice_ptt_background,
+    DataText,
+    draw_text,
+    player_time_format,
+)
 from ..AUA import UserRecent, AccountInfo, SongInfo, UserBest
 
 
 def draw_single_song(data: Union[UserRecent, UserBest]):
     """
-        not finished yet
+    not finished yet
     """
     # User Info
     account_info: AccountInfo = data.account_info
     arcaea_id: str = account_info.code
     name: str = account_info.name
-#    character = account_info.character
+    #    character = account_info.character
     character = 54
     is_char_uncapped_override: bool = account_info.is_char_uncapped
     is_char_uncapped: bool = account_info.is_char_uncapped
@@ -22,7 +28,7 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
         if is_char_uncapped ^ is_char_uncapped_override
         else f"{character}_icon.png"
     )
-#    rating: str = account_info.rating
+    #    rating: str = account_info.rating
     rating: int = 1260
     # Score Info
     if isinstance(data, UserRecent):
@@ -90,10 +96,15 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
     image.alpha_composite(ptt, (655, 50))
 
     write_player_name = DataText(
-        (560 - len(name) * 20), 35, 40, name, StaticPath.andrea)
-    image = draw_text(image, write_player_name, (96, 75, 84), stroke_fill=(96, 75, 84), stroke_width=1)
+        (560 - len(name) * 20), 35, 40, name, StaticPath.andrea
+    )
+    image = draw_text(
+        image, write_player_name, (96, 75, 84), stroke_fill=(96, 75, 84), stroke_width=1
+    )
     write_arcaea_id = DataText(950, 40, 30, f"< {arcaea_id} >", StaticPath.exo_semibold)
-    image = draw_text(image, write_arcaea_id, "white", stroke_fill="black", stroke_width=1)
+    image = draw_text(
+        image, write_arcaea_id, "white", stroke_fill="black", stroke_width=1
+    )
     write_song_name = DataText(
         (640 - len(song_name) / 2 * 20),
         115,
@@ -125,10 +136,14 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
         ["Past", "Present", "Future", "Beyond"][difficulty] + " " + str(int(constant)),
         StaticPath.kazesawa_regular,
     )
-    diff_color = ((20, 165, 215), (120, 150, 80), (115, 35, 100), (166, 20, 49))[difficulty]
+    diff_color = ((20, 165, 215), (120, 150, 80), (115, 35, 100), (166, 20, 49))[
+        difficulty
+    ]
     image = draw_text(image, write_difficulty, diff_color)
     write_recent_text = DataText(40, 35, 45, "Recent", StaticPath.andrea)
-    image = draw_text(image, write_recent_text, (96, 75, 84), stroke_fill= (96, 75, 84), stroke_width=1)
+    image = draw_text(
+        image, write_recent_text, (96, 75, 84), stroke_fill=(96, 75, 84), stroke_width=1
+    )
     count = open_img(StaticPath.count)
     count.thumbnail((110, 110))
     image.alpha_composite(count, (560, 526))
@@ -143,11 +158,23 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
         str(perfect_count),
         StaticPath.geosans_light,
     )
-    image = draw_text(image, write_perfect_count, (137, 137, 137, 255), stroke_fill="white", stroke_width=2)
+    image = draw_text(
+        image,
+        write_perfect_count,
+        (137, 137, 137, 255),
+        stroke_fill="white",
+        stroke_width=2,
+    )
     write_shiny_perfect_count = DataText(
         720, 530, 30, "+ " + str(shiny_perfect_count), StaticPath.geosans_light
     )
-    image = draw_text(image, write_shiny_perfect_count, (137, 137, 137, 255), stroke_fill="white", stroke_width=2)
+    image = draw_text(
+        image,
+        write_shiny_perfect_count,
+        (137, 137, 137, 255),
+        stroke_fill="white",
+        stroke_width=2,
+    )
     write_near_count = DataText(
         670 + (4 - len(str(near_count)) / 2 * 15),
         571,
@@ -155,7 +182,9 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
         str(near_count),
         StaticPath.geosans_light,
     )
-    image = draw_text(image, write_near_count, (110, 110, 110), stroke_fill="white", stroke_width=2)
+    image = draw_text(
+        image, write_near_count, (110, 110, 110), stroke_fill="white", stroke_width=2
+    )
     write_miss_count = DataText(
         670 + (4 - len(str(miss_count)) / 2 * 15),
         611,
@@ -163,7 +192,13 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
         str(miss_count),
         StaticPath.geosans_light,
     )
-    image = draw_text(image, write_miss_count, (137, 137, 137, 255), stroke_fill="white", stroke_width=2)
+    image = draw_text(
+        image,
+        write_miss_count,
+        (137, 137, 137, 255),
+        stroke_fill="white",
+        stroke_width=2,
+    )
     raw_ptt = f"{(rating/100):.2f}".split(".")
     write_ptt_head = DataText(
         690, 100, 30, raw_ptt[0], StaticPath.exo_semibold, anchor="rs"
@@ -175,7 +210,14 @@ def draw_single_song(data: Union[UserRecent, UserBest]):
     image = draw_text(image, write_ptt_tail, stroke_fill="Black", stroke_width=2)
     time_bg = open_img(StaticPath.time_bg).resize((314, 70))
     image.alpha_composite(time_bg, (1050, 690))
-    write_played_time = DataText(1260, 714, 20, player_time_format(score_info.time_played), StaticPath.kazesawa_regular, "rb")
+    write_played_time = DataText(
+        1260,
+        714,
+        20,
+        player_time_format(score_info.time_played),
+        StaticPath.kazesawa_regular,
+        "rb",
+    )
     image = draw_text(image, write_played_time, "white")
     rating_up = open_img(StaticPath.rating_up).resize((215, 215))
     image.alpha_composite(rating_up, (695, -70))

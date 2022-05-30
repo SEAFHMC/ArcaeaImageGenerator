@@ -1,7 +1,15 @@
 from typing import Union
 from ..AUA import AccountInfo, UserRecent, SongInfo, UserBest
 from PIL import Image, ImageFilter
-from ..utils import open_img, DataText, draw_text, player_time_format, StaticPath, choice_ptt_background
+from ..utils import (
+    open_img,
+    DataText,
+    draw_text,
+    player_time_format,
+    StaticPath,
+    choice_ptt_background,
+)
+
 
 def draw_single_song(data: Union[UserRecent, UserBest]):
     # User Info
