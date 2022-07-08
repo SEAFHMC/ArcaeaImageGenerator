@@ -1,7 +1,7 @@
 {
   "status": 0,
   "content": {
-    "best30_avg": 10.623436888888891,
+    "best30_avg": 13.0,
     "recent10_avg": 0.0,
     "account_info": {
       "code": "658041097",
@@ -11,7 +11,7 @@
       "is_char_uncapped_override": false,
       "is_char_uncapped": false,
       "is_skill_sealed": false,
-      "rating": 1060,
+      "rating": 1345,
       "join_date": 1558085421146,
       "character": 14
     },

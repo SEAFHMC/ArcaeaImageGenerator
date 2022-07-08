@@ -207,6 +207,7 @@ def draw_b30(data: Dict):
         )
     return B30_bg
 
+
 resp = get_user_b30()
 
 res = draw_b30(data=resp)
