@@ -131,3 +131,6 @@ dmypy.json
 # Pics
 song/
 char/
+
+#Config
+config.py
