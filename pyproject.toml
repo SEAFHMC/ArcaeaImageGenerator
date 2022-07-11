@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "image-generator"
+name = "ArcaeaImageGenerator"
 version = "0.1.0"
 description = ""
 authors = ["SEAFHMC <d1366160279@gmail.com>"]
