@@ -38,7 +38,7 @@ def draw_single_song(data: Union[UserInfo, UserBest]):
     song_id = score_info.song_id
     song_info = data.content.songinfo[0]
     song_name = song_info.name_en
-    author_name= song_info.artist
+    author_name = song_info.artist
     difficulty = score_info.difficulty
     score = score_info.score
     shiny_perfect_count = score_info.shiny_perfect_count

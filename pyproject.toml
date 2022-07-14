@@ -7,6 +7,8 @@ authors = ["SEAFHMC <d1366160279@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 Pillow = ">=8.3.1"
+httpx = ">=0.20.0, <1.0.0"
+pydantic = "^1.9.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
